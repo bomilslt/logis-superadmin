@@ -37,6 +37,14 @@ const App = (() => {
             Utils.showToast('Session expirée, veuillez vous reconnecter', 'warning');
         });
 
+        // Empecher la molette de modifier la valeur des input[type=number]
+        document.addEventListener('wheel', (e) => {
+            const el = document.activeElement;
+            if (el && el.tagName === 'INPUT' && el.type === 'number') {
+                el.blur();
+            }
+        }, { passive: true });
+
         // Event listeners
         document.getElementById('login-form').addEventListener('submit', handleLogin);
         document.getElementById('logout-btn').addEventListener('click', handleLogout);
